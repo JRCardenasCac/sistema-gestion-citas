@@ -3,18 +3,19 @@ import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
-  selector: 'app-recover-password',
-  templateUrl: './recover-password.component.html',
-  styleUrls: ['./recover-password.component.css'],
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css'],
 })
-export class RecoverPasswordComponent {
-  password: string = '';
-  password2: string = '';
+export class ForgotPasswordComponent implements OnInit {
+  email: string = '';
   constructor(public userService: UsersService, public router: Router) {}
 
-  recoverPassword() {
-    const user = { password: this.password, password2: this.password2 };
-    this.userService.RecoverPassword(user).subscribe(
+  ngOnInit(): void {}
+
+  forgotPassword() {
+    const user = { email: this.email };
+    this.userService.forgotPassword(user).subscribe(
       (data) => {
         if (data.access_token != null) {
           this.userService.setToken(data.token);
